@@ -10,7 +10,8 @@ You’ll build a balanced BST in this assignment. Do not use duplicate values be
 
 Tip: If you would like to visualize your binary search tree, here is a prettyPrint() function that will console.log your tree in a structured format. This function will expect to receive the root of your tree as the value for the node parameter.
 
-````const prettyPrint = (node, prefix = '', isLeft = true) => {
+```
+const prettyPrint = (node, prefix = '', isLeft = true) => {
   if (node.right !== null) {
     prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
   }
@@ -18,7 +19,8 @@ Tip: If you would like to visualize your binary search tree, here is a prettyPri
   if (node.left !== null) {
     prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
   }
-}```
+}
+```
 
 4. Write an insert and delete functions which accepts a value to insert/delete (you’ll have to deal with several cases for delete such as when a node has children or not). If you need additional resources, check out these two articles on inserting and deleting, or this video with several visual examples.
 
@@ -37,6 +39,7 @@ Tip: If you would like to visualize your binary search tree, here is a prettyPri
 11. Write a rebalance function which rebalances an unbalanced tree. Tip: You’ll want to use a traversal method to provide a new array to the buildTree function.
 
 ## Tie it all together
+
 Write a simple driver script that does the following:
 
 1. Create a binary search tree from an array of random numbers. You can create a function that returns an array of random numbers every time you call it, if you wish.
@@ -47,4 +50,7 @@ Write a simple driver script that does the following:
 6. Balance the tree by calling rebalance
 7. Confirm that the tree is balanced by calling isBalanced
 8. Print out all elements in level, pre, post, and in order
-````
+
+```
+
+```
