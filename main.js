@@ -16,22 +16,19 @@ const treeFactory = arr => {
   };
 };
 
+// Write a buildTree function which takes an array of data (e.g. [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]) and turns it into a balanced binary tree full of Node objects appropriately placed (don’t forget to sort and remove duplicates!). The buildTree function should return the level-0 root node.
 const buildTree = arr => {
   let sortedArray = [...new Set(arr)].sort((a, b) => a - b);
 
   if (sortedArray.length === 0) return null;
-  // let sortedArray = array;
   let start = 0;
-  let end = sortedArray.length - 1;
-  if (start > end) return null;
 
-  // let mid = Math.floor((start + end) / 2);
   let mid = Math.floor(sortedArray.length / 2);
 
   let root = nodeFactory(sortedArray[mid]);
 
-  root.left = buildTree(sortedArray.slice(start, mid));
-  root.right = buildTree(sortedArray.slice(mid + 1));
+  root.left = buildTree(sortedArray.slice(start, mid)); // arg left
+  root.right = buildTree(sortedArray.slice(mid + 1)); // arg right
 
   return root;
 };
@@ -46,15 +43,11 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-const tree = treeFactory([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-const printTree = prettyPrint(tree.root);
-console.log(printTree);
-
-// private static TreeNode createBST (int[] array,
-// int start, int end) (
-// if (start›end) return null;
-// int mid = (start + end) /2;
-// TreeNode root = new TreeNode (array [mid]) ;
-// root.setLeft (createBST (array, start, mid-1)); root. setRight (createBST (array, mid+1, end));
-// return root;
-// }
+// const tree = treeFactory([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+const tree2 = treeFactory([
+  50, 30, 20, 70, 80, 85, 75, 60, 65, 40, 32, 34, 36, 36, 75, 85,
+]);
+// const printTree = prettyPrint(tree.root);
+const printTree2 = prettyPrint(tree2.root);
+// console.log(printTree);
+console.log(printTree2);
