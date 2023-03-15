@@ -22,6 +22,8 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 ```
 
+Prints
+
 ```
 │       ┌── 6345
 │       │   └── 324
