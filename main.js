@@ -8,7 +8,6 @@ const nodeFactory = (data, left = null, right = null) => {
 };
 
 // Build a Tree class / factory which accepts an array when initialized. The Tree class should have a root attribute which uses the return value of buildTree which you’ll write next.
-
 const treeFactory = arr => {
   let root = buildTree(arr);
 
@@ -26,12 +25,14 @@ const buildTree = arr => {
   let end = sortedArray.length - 1;
   if (start > end) return null;
 
+  // let mid = Math.floor((start + end) / 2);
   let mid = Math.floor(sortedArray.length / 2);
 
   let root = nodeFactory(sortedArray[mid]);
 
   root.left = buildTree(sortedArray.slice(start, mid));
   root.right = buildTree(sortedArray.slice(mid + 1));
+
   return root;
 };
 
@@ -45,7 +46,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 };
 
-const tree = treeFactory([9, 8, 7, 6, 5, 4, 3, 2, 1, 3, 1, 3, 1]);
+const tree = treeFactory([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const printTree = prettyPrint(tree.root);
 console.log(printTree);
 

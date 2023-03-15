@@ -22,6 +22,20 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 }
 ```
 
+```
+│       ┌── 6345
+│       │   └── 324
+│   ┌── 67
+│   │   └── 23
+│   │       └── 9
+└── 8
+    │   ┌── 7
+    │   │   └── 5
+    └── 4
+        └── 3
+            └── 1
+```
+
 4. Write an insert and delete functions which accepts a value to insert/delete (you’ll have to deal with several cases for delete such as when a node has children or not). If you need additional resources, check out these two articles on inserting and deleting, or this video with several visual examples.
 
 5. Write a find function which accepts a value and returns the node with the given value.
