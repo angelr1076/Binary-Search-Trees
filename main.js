@@ -38,7 +38,9 @@ const buildTree = arr => {
 const insert = (node, value) => {
   if (!node) return nodeFactory(value);
 
-  if (value < node.data) {
+  if (value === node.data) {
+    return node;
+  } else if (value < node.data) {
     if (!node.left) {
       node.left = nodeFactory(value);
     } else {
@@ -54,9 +56,31 @@ const insert = (node, value) => {
   return node;
 };
 
+const deleteNode = (node, value) => {
+  if (node === null) return null;
+
+  if (value < node.data) {
+    node.left = deleteNode(node.left, value);
+  } else if (value > node.data) {
+    node.right = deleteNode(node.right, value);
+  } else {
+    if (node.left === null) {
+      return node.right;
+    } else if (node.right === null) {
+      return node.left;
+    }
+
+    let minNode = findMinNode(node.right);
+    node.data = minNode.data;
+    node.right = deleteNode(node.right, minNode.data);
+  }
+
+  return node;
+};
+
 // 5. Write a find function which accepts a value and returns the node with the given value.
 const find = (node, value) => {
-  if (!node) return `Not found`;
+  if (node === null) return node;
 
   if (node.data === value) return value;
 
@@ -67,9 +91,20 @@ const find = (node, value) => {
   }
 };
 
+// 6. Write a levelOrder function which accepts another function as a parameter. levelOrder should traverse the tree in breadth-first level order and provide each node as the argument to the provided function. This function can be implemented using either iteration or recursion (try implementing both!). The method should return an array of values if no function is given. Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list.
+const levelOrder = func => {};
+
 // Helper functions
 const sortArray = arr => {
   return [...new Set(arr)].sort((a, b) => a - b);
+};
+
+const findMinNode = node => {
+  while (node.left !== null) {
+    node = node.left;
+  }
+
+  return node;
 };
 
 // prettyPrint() function will console.log your tree in a structured format. This function will expect to receive the root of your tree as the value for the node parameter.
@@ -87,8 +122,9 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 const array1 = [50, 30, 20, 70, 80, 85, 75, 60, 65, 40, 32, 34, 36, 36, 75, 85];
 const tree2 = treeFactory(array1);
 const root = tree2.root;
-const insert1 = insert(root, 31);
-const find1 = find(root, 32);
+const insert1 = insert(root, 25);
+const remove = deleteNode(root, 34);
+const find1 = find(root, 50);
 const find2 = find(root, 10);
 const printTree2 = prettyPrint(tree2.root);
-console.log({ find1, find2, insert1, printTree2 });
+console.log({ find1, find2, insert1, remove, printTree2 });
