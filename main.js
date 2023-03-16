@@ -57,7 +57,7 @@ const insert = (node, value) => {
 };
 
 const deleteNode = (node, value) => {
-  if (node === null) return null;
+  if (node === null) return node;
 
   if (value < node.data) {
     node.left = deleteNode(node.left, value);
@@ -92,7 +92,26 @@ const find = (node, value) => {
 };
 
 // 6. Write a levelOrder function which accepts another function as a parameter. levelOrder should traverse the tree in breadth-first level order and provide each node as the argument to the provided function. This function can be implemented using either iteration or recursion (try implementing both!). The method should return an array of values if no function is given. Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list.
-const levelOrder = func => {};
+const levelOrder = (node, callbackFunc = null) => {
+  if (node === null) return node;
+
+  let queue = [node];
+  let arr = [];
+
+  while (queue.length > 0) {
+    let node = queue.shift();
+    arr.push(node.data);
+
+    if (node.left !== null) {
+      queue.push(node.left);
+    }
+    if (node.right !== null) {
+      queue.push(node.right);
+    }
+  }
+
+  return arr;
+};
 
 // Helper functions
 const sortArray = arr => {
@@ -124,7 +143,8 @@ const tree2 = treeFactory(array1);
 const root = tree2.root;
 const insert1 = insert(root, 25);
 const remove = deleteNode(root, 34);
+const callLevelOrder = levelOrder(root);
 const find1 = find(root, 50);
 const find2 = find(root, 10);
 const printTree2 = prettyPrint(tree2.root);
-console.log({ find1, find2, insert1, remove, printTree2 });
+console.log({ find1, find2, insert1, remove, printTree2, callLevelOrder });
