@@ -92,7 +92,7 @@ const find = (node, value) => {
 };
 
 // 6. Write a levelOrder function which accepts another function as a parameter. levelOrder should traverse the tree in breadth-first level order and provide each node as the argument to the provided function. This function can be implemented using either iteration or recursion (try implementing both!). The method should return an array of values if no function is given. Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list.
-const levelOrder = (node, callbackFunc = null) => {
+const levelOrder = (node, callbackFunc) => {
   if (node === null) return node;
 
   let queue = [node];
@@ -118,6 +118,10 @@ const sortArray = arr => {
   return [...new Set(arr)].sort((a, b) => a - b);
 };
 
+const logNode = node => {
+  console.log(node.data);
+};
+
 const findMinNode = node => {
   while (node.left !== null) {
     node = node.left;
@@ -139,12 +143,31 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 const array1 = [50, 30, 20, 70, 80, 85, 75, 60, 65, 40, 32, 34, 36, 36, 75, 85];
-const tree2 = treeFactory(array1);
-const root = tree2.root;
+const tree1 = treeFactory(array1);
+const root = tree1.root;
 const insert1 = insert(root, 25);
 const remove = deleteNode(root, 34);
+const find1 = find(root, 50); // true
+const find2 = find(root, 10); // false
 const callLevelOrder = levelOrder(root);
-const find1 = find(root, 50);
-const find2 = find(root, 10);
-const printTree2 = prettyPrint(tree2.root);
-console.log({ find1, find2, insert1, remove, printTree2, callLevelOrder });
+const printTree1 = prettyPrint(root);
+const array2 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+const tree2 = treeFactory(array2);
+const root2 = tree2.root;
+const insert2 = insert(root2, 12);
+const remove2 = deleteNode(root2, 7);
+const find3 = find(root2, 6); // true
+const find4 = find(root2, 50); // false
+const callLevelOrder2 = levelOrder(root2);
+const logCallback2 = levelOrder(root2, logNode);
+const printTree2 = prettyPrint(root2);
+// console.log({ find1, find2, insert1, remove, printTree1, callLevelOrder });
+console.log({
+  find3,
+  find4,
+  insert2,
+  remove2,
+  printTree2,
+  callLevelOrder2,
+  logCallback2,
+});

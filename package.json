@@ -1,0 +1,27 @@
+{
+  "name": "odin-binarysearchtrees",
+  "version": "1.0.0",
+  "description": "You’ll build a balanced BST in this assignment. Do not use duplicate values because they make it more complicated and result in trees that are much harder to balance. Therefore, be sure to always remove duplicate values or check for an existing value before inserting.",
+  "main": "main.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelr1076/Odin-Binary-Search-Trees.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/angelr1076/Odin-Binary-Search-Trees/issues"
+  },
+  "homepage": "https://github.com/angelr1076/Odin-Binary-Search-Trees#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@types/jest": "^29.5.0",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0"
+  }
+}
