@@ -92,6 +92,7 @@ const find = (node, value) => {
 };
 
 // 6. Write a levelOrder function which accepts another function as a parameter. levelOrder should traverse the tree in breadth-first level order and provide each node as the argument to the provided function. This function can be implemented using either iteration or recursion (try implementing both!). The method should return an array of values if no function is given. Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list.
+// Breadth first
 const levelOrder = (node, callbackFunc) => {
   if (node === null) return node;
 
@@ -102,15 +103,104 @@ const levelOrder = (node, callbackFunc) => {
     let node = queue.shift();
     arr.push(node.data);
 
-    if (node.left !== null) {
-      queue.push(node.left);
-    }
-    if (node.right !== null) {
-      queue.push(node.right);
-    }
+    if (node.left !== null) queue.push(node.left);
+    if (node.right !== null) queue.push(node.right);
   }
 
   return arr;
+};
+
+// 7. Write inorder (left, root, right), preorder (root, left, right), and postorder (left, right, root) functions that accept a function parameter. Each of these functions should traverse the tree in their respective depth-first order and yield each node to the provided function given as an argument. The functions should return an array of values if no function is given.
+const inOrder = (node, callbackFunc) => {
+  let result = [];
+
+  if (node === null) return result;
+
+  if (node.left !== null)
+    result = [...result, ...inOrder(node.left, callbackFunc)];
+
+  result.push(node.data);
+
+  if (node.right !== null)
+    result = [...result, ...inOrder(node.right, callbackFunc)];
+
+  return result;
+};
+
+const preOrder = (node, callbackFunc) => {
+  let result = [];
+
+  if (node === null) return result;
+
+  result.push(node.data);
+
+  if (node.left !== null)
+    result = [...result, ...preOrder(node.left, callbackFunc)];
+  if (node.right !== null)
+    result = [...result, ...preOrder(node.right, callbackFunc)];
+
+  return result;
+};
+
+const postOrder = (node, callbackFunc) => {
+  let result = [];
+
+  if (node === null) return result;
+
+  if (node.left !== null)
+    result = [...result, ...postOrder(node.left, callbackFunc)];
+  if (node.right !== null)
+    result = [...result, ...postOrder(node.right, callbackFunc)];
+
+  result.push(node.data);
+
+  return result;
+};
+
+// 8. Write a height function which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node.
+const height = node => {
+  if (node === null) return 0;
+
+  let leftHeight = height(node.left);
+  let rightHeight = height(node.right);
+
+  return 1 + Math.max(leftHeight, rightHeight);
+};
+
+// 9. Write a depth function which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.
+const depth = node => {
+  if (!node) return 0;
+
+  let leftDepth = depth(node.left);
+  let rightDepth = depth(node.right);
+
+  return Math.max(leftDepth, rightDepth) + 1;
+};
+
+// 10. Write a isBalanced function which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
+const isBalanced = node => {
+  if (node === null) return true;
+
+  let leftHeight = height(node.left);
+  let rightHeight = height(node.right);
+
+  if (
+    leftHeight - rightHeight <= 1 &&
+    isBalanced(node.left) &&
+    isBalanced(node.right)
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+// 11. Write a rebalance function which rebalances an unbalanced tree. Tip: You’ll want to use a traversal method to provide a new array to the buildTree function.
+const rebalance = node => {
+  if (node === null || isBalanced(node) === true) return;
+
+  let callOrder = inOrder(node, logNode);
+  return callOrder;
 };
 
 // Helper functions
@@ -123,9 +213,7 @@ const logNode = node => {
 };
 
 const findMinNode = node => {
-  while (node.left !== null) {
-    node = node.left;
-  }
+  while (node.left !== null) node = node.left;
 
   return node;
 };
@@ -142,14 +230,17 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   return `Root is ${node.data}`;
 };
 
-const array1 = [50, 30, 20, 70, 80, 85, 75, 60, 65, 40, 32, 34, 36, 36, 75, 85];
+const array1 = [
+  50, 30, 20, 70, 80, 85, 75, 60, 65, 40, 32, 34, 36, 36, 75, 85, 90, 91, 92,
+  93, 94, 95,
+];
 const tree1 = treeFactory(array1);
 const root = tree1.root;
 const insert1 = insert(root, 25);
 const remove = deleteNode(root, 34);
 const find1 = find(root, 50); // true
 const find2 = find(root, 10); // false
-const callLevelOrder = levelOrder(root);
+const callLevelOrder = levelOrder(root, logNode);
 const printTree1 = prettyPrint(root);
 const array2 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
 const tree2 = treeFactory(array2);
@@ -160,14 +251,28 @@ const find3 = find(root2, 6); // true
 const find4 = find(root2, 50); // false
 const callLevelOrder2 = levelOrder(root2);
 const logCallback2 = levelOrder(root2, logNode);
+const inOrder2 = inOrder(root2, logNode);
+const preOrder2 = preOrder(root2, logNode);
+const postOrder2 = postOrder(root2, logNode);
+const height2 = height(root2);
+const depth2 = depth(root2);
+const balanced = isBalanced(root2);
+const rebalance2 = rebalance(root);
 const printTree2 = prettyPrint(root2);
-// console.log({ find1, find2, insert1, remove, printTree1, callLevelOrder });
+console.log({ find1, find2, insert1, remove, printTree1, callLevelOrder });
 console.log({
   find3,
   find4,
   insert2,
   remove2,
-  printTree2,
   callLevelOrder2,
   logCallback2,
+  inOrder2,
+  preOrder2,
+  postOrder2,
+  height2,
+  depth2,
+  balanced,
+  rebalance2,
+  printTree2,
 });
