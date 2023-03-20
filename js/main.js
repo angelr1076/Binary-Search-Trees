@@ -196,11 +196,16 @@ const isBalanced = node => {
 };
 
 // 11. Write a rebalance function which rebalances an unbalanced tree. Tip: You’ll want to use a traversal method to provide a new array to the buildTree function.
+// Steps to write a rebalance function:
+
 const rebalance = node => {
-  if (node === null || isBalanced(node) === true) return;
+  if (node === null) return null;
+  if (isBalanced(node)) return node;
 
   let callOrder = inOrder(node, logNode);
-  return callOrder;
+  let balancedTree = buildTree(callOrder);
+
+  return balancedTree;
 };
 
 // Helper functions
@@ -232,7 +237,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 
 const array1 = [
   50, 30, 20, 70, 80, 85, 75, 60, 65, 40, 32, 34, 36, 36, 75, 85, 90, 91, 92,
-  93, 94, 95,
+  93, 94, 95, 120,
 ];
 const tree1 = treeFactory(array1);
 const root = tree1.root;
