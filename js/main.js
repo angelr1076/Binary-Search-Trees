@@ -281,3 +281,21 @@ console.log({
   rebalance2,
   printTree2,
 });
+
+export {
+  nodeFactory,
+  buildTree,
+  treeFactory,
+  insert,
+  deleteNode,
+  find,
+  levelOrder,
+  inOrder,
+  preOrder,
+  postOrder,
+  height,
+  depth,
+  isBalanced,
+  rebalance,
+  sortArray,
+};
