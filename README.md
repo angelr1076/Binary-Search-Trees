@@ -25,17 +25,26 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 Prints
 
 ```
-│       ┌── 6345
-│       │   └── 324
-│   ┌── 67
-│   │   └── 23
-│   │       └── 9
-└── 8
-    │   ┌── 7
-    │   │   └── 5
-    └── 4
-        └── 3
-            └── 1
+│               ┌── 94
+│           ┌── 92
+│       ┌── 89
+│       │   │   ┌── 84
+│       │   └── 81
+│   ┌── 79
+│   │   │       ┌── 73
+│   │   │   ┌── 59
+│   │   └── 55
+│   │       └── 52
+└── 51
+    │           ┌── 46
+    │       ┌── 44
+    │   ┌── 28
+    │   │   └── 26
+    └── 20
+        │       ┌── 17
+        │   ┌── 16
+        └── 4
+            └── 2
 ```
 
 4. Write an insert and delete functions which accepts a value to insert/delete (you’ll have to deal with several cases for delete such as when a node has children or not). If you need additional resources, check out these two articles on inserting and deleting, or this video with several visual examples.
